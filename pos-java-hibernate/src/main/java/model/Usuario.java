@@ -4,8 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+	@NamedQuery(name = "Usuario.findByName", query = "SELECT u FROM Usuario u WHERE u.nome = :nome")
+})
 public class Usuario {
 
 	@Id
@@ -73,6 +79,12 @@ public class Usuario {
 
 	public void setIdade(int idade) {
 		this.idade = idade;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email + ", login="
+				+ login + ", senha=" + senha + ", idade=" + idade + "]";
 	}
 
 }

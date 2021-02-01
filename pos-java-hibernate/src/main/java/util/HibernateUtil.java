@@ -25,4 +25,8 @@ public class HibernateUtil {
 	public static EntityManager getEntityManager() {
 		return emf.createEntityManager();
 	}
+	
+	public static Object getPrimaryKey(Object entity) {
+		return emf.getPersistenceUnitUtil().getIdentifier(entity);
+	}
 }
