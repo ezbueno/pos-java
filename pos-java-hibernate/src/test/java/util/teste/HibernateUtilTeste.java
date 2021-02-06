@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import dao.DaoGenerico;
+import model.Telefone;
 import model.Usuario;
 
 public class HibernateUtilTeste {
@@ -104,10 +105,10 @@ public class HibernateUtilTeste {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void listarParametro() {
 		DaoGenerico<Usuario> daoGenerico = new DaoGenerico<Usuario>();
-		@SuppressWarnings("unchecked")
 		List<Usuario> usuarios = daoGenerico.getEntityManager()
 				.createQuery("FROM Usuario WHERE nome = :nome")
 				.setParameter("nome", "Ezandro")
@@ -153,6 +154,51 @@ public class HibernateUtilTeste {
 		
 		for (Usuario usuario : usuarios) {
 			System.out.println(usuario);
+		}
+	}
+	
+	@Test
+	public void salvarTelefone() {
+		DaoGenerico<Object> daoGenerico = new DaoGenerico<Object>();
+		
+		Usuario usuario = new Usuario();
+		usuario.setId(2L);
+		
+		daoGenerico.consultar(usuario);
+		
+		Telefone telefone = new Telefone();
+		telefone.setTipo("Celular");
+		telefone.setNumero("(11) 99999-1111");
+		telefone.setUsuario(usuario);
+		
+		daoGenerico.salvar(telefone);
+	}
+	
+	@Test
+	public void pesquisarTelefone() {
+//		DaoGenerico<Usuario> daoGenerico = new DaoGenerico<Usuario>();
+//		
+//		Usuario usuario = (Usuario) daoGenerico.pesquisar(1L, Usuario.class);
+//		
+//		for (Telefone telefone : usuario.getTelefones()) {
+//			System.out.println(telefone.getTipo());
+//			System.out.println(telefone.getNumero());
+//			System.out.println(telefone.getUsuario());
+//		}
+		
+		DaoGenerico<Usuario> daoGenerico = new DaoGenerico<Usuario>();
+		Usuario usuario = new Usuario();
+		usuario.setId(2L);
+		usuario = daoGenerico.consultar(usuario);
+
+		if (!usuario.getTelefones().isEmpty()) {
+			for (Telefone telefone : usuario.getTelefones()) {
+				System.out.println(telefone.getTipo());
+				System.out.println(telefone.getNumero());
+				System.out.println(telefone.getUsuario());
+			}
+		} else {
+			System.out.println("O usuário com ID: " + usuario.getId() + " não possui telefone cadastrado!");
 		}
 	}
 }

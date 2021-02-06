@@ -34,6 +34,11 @@ public class DaoGenerico<E> {
 		return e;
 	}
 	
+	public E pesquisar(Long id, Class<E> entidade) {
+		E e = (E) em.find(entidade, id);
+		return e;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<E> listar(Class<E> entidade) {
 		EntityTransaction et = em.getTransaction();
