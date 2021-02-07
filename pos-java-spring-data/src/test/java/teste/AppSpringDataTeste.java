@@ -11,6 +11,6 @@ public class AppSpringDataTeste {
 	
 	@Test
 	public void inserir() {
-		System.out.println("Spring inicializado com sucesso!");
+		System.out.println("Spring iniciou com sucesso!");
 	}
 }
