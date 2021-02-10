@@ -23,11 +23,11 @@ public class AppSpringDataTeste {
 	public void inserir() {
 		Usuario usuario = new Usuario();
 
-		usuario.setLogin("nay");
-		usuario.setSenha("cba");
-		usuario.setNome("Nayara Balarotti");
-		usuario.setEmail("nay@teste.com");
-		usuario.setIdade(27);
+		usuario.setLogin("emnie");
+		usuario.setSenha("aei");
+		usuario.setNome("Emnie");
+		usuario.setEmail("emnie@teste.com");
+		usuario.setIdade(26);
 		
 		usuarioRepositorio.save(usuario);
 	}
@@ -85,6 +85,20 @@ public class AppSpringDataTeste {
 		
 		atualiza.setEmail("emnie@teste.com");
 		usuarioRepositorio.save(atualiza);
+	}
+	
+	@Test
+	public void atualizarEmailPorNome() {
+		List<Usuario> usuarios = usuarioRepositorio.consultarPorNome("Nayara");
+
+		if (usuarios.isEmpty()) {
+			System.out.println("Usuário não encontrado!");
+		} else {
+			Usuario usuario = new Usuario();
+			usuario.setEmail("nayara@teste.com");
+			String nome = usuarios.get(0).getNome();
+			usuarioRepositorio.atualizarEmailPorNome(usuario.getEmail(), nome);
+		}
 	}
 	
 	@Test
