@@ -6,6 +6,29 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head></h:head>
 <h:body>
-	<h:outputLabel>Olá, JSF!</h:outputLabel>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel>Id:</h:outputLabel>
+			<h:inputText readonly="true" value="#{usuarioBean.usuario.id}" />
+
+			<h:outputLabel>Nome:</h:outputLabel>
+			<h:inputText value="#{usuarioBean.usuario.nome}" />
+
+			<h:outputLabel>Sobrenome:</h:outputLabel>
+			<h:inputText value="#{usuarioBean.usuario.sobrenome}" />
+
+			<h:outputLabel>E-mail:</h:outputLabel>
+			<h:inputText value="#{usuarioBean.usuario.email}" />
+			
+			<h:outputLabel>Idade:</h:outputLabel>
+			<h:inputText value="#{usuarioBean.usuario.idade}" />			
+
+			<h:outputLabel>Login:</h:outputLabel>
+			<h:inputText value="#{usuarioBean.usuario.login}" />
+
+			<h:outputLabel>Senha:</h:outputLabel>
+			<h:inputSecret value="#{usuarioBean.usuario.senha}" />
+		</h:panelGrid>
+	</h:form>
 </h:body>
 </html>
