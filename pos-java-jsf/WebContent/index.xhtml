@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head></h:head>
 <h:body>
 	<h:form>
@@ -19,9 +20,9 @@
 
 			<h:outputLabel>E-mail:</h:outputLabel>
 			<h:inputText value="#{usuarioBean.usuario.email}" />
-			
+
 			<h:outputLabel>Idade:</h:outputLabel>
-			<h:inputText value="#{usuarioBean.usuario.idade}" />			
+			<h:inputText value="#{usuarioBean.usuario.idade}" />
 
 			<h:outputLabel>Login:</h:outputLabel>
 			<h:inputText value="#{usuarioBean.usuario.login}" />
@@ -29,6 +30,63 @@
 			<h:outputLabel>Senha:</h:outputLabel>
 			<h:inputSecret value="#{usuarioBean.usuario.senha}" />
 		</h:panelGrid>
+
+		<br />
+		<br />
+
+		<h:commandButton value="Salvar" action="#{usuarioBean.salvar}" />
+		<h:commandButton value="Novo" action="#{usuarioBean.novo}" />
+
+		<br />
+		<br />
+
+		<h:dataTable value="#{usuarioBean.lista}" var="usuario"
+			cellpadding="15" border="1">
+			<f:facet name="header">Lista de usuários</f:facet>
+			<h:column style="width:150px;">
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{usuario.id}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{usuario.nome}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Sobrenome</f:facet>
+				<h:outputText value="#{usuario.sobrenome}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">E-mail</f:facet>
+				<h:outputText value="#{usuario.email}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Login</f:facet>
+				<h:outputText value="#{usuario.login}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Idade</f:facet>
+				<h:outputText value="#{usuario.idade}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Editar</f:facet>
+				<h:commandLink value="Editar">
+					<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
+				</h:commandLink>
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Excluir</f:facet>
+				<h:commandLink action="#{usuarioBean.excluir}" value="Excluir">
+					<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
 	</h:form>
 </h:body>
 </html>
